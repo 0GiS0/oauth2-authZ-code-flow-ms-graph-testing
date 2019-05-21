@@ -88,8 +88,8 @@ app.post('/call/ms/graph', (req, res) => {
 
     // const Microsoft_Graph_Endpoint = 'https://graph.microsoft.com/beta';
     // const Acction_That_I_Have_Access_Because_Of_My_Scope = '/me';
-    const Microsoft_Graph_Endpoint = 'https://graph.microsoft.com/beta';
-    const Acction_That_I_Have_Access_Because_Of_My_Scope = '/me/contacts';
+    const Microsoft_Graph_Endpoint = 'https://graph.microsoft.com/v1.0';
+    const Acction_That_I_Have_Access_Because_Of_My_Scope = '/me/contacts?$skip=10';
     // const Acction_That_I_Have_Access_Because_Of_My_Scope = '/me/people';
 
     log.info(access_token);
