@@ -25,8 +25,8 @@ app.get('/', (req, res) => {
 //Set 1: Ask the authorization code
 app.get('/get/the/code', (req, res) => {
 
-    const Authorization_Endpoint = `https://login.microsoftonline.com/${process.env.TENANT_ID}/oauth2/authorize`; 
-    // const Authorization_Endpoint = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize`; 
+    // const Authorization_Endpoint = `https://login.microsoftonline.com/${process.env.TENANT_ID}/oauth2/authorize`; 
+    const Authorization_Endpoint = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize`; 
     const Response_Type = 'code';
     const Client_Id = process.env.CLIENT_ID;
     const Redirect_Uri = 'http://localhost:8000/give/me/the/code';
@@ -51,8 +51,8 @@ app.get('/give/me/the/code', (req, res) => {
 //Step 3: Exchange the code for a token
 app.post('/exchange/the/code/for/a/token', (req, res) => {
 
-    const Token_Endpoint = `https://login.microsoftonline.com/${process.env.TENANT_ID}/oauth2/v2.0/token`;
-    // const Token_Endpoint = `https://login.microsoftonline.com/common/oauth2/v2.0/token`;
+    // const Token_Endpoint = `https://login.microsoftonline.com/${process.env.TENANT_ID}/oauth2/v2.0/token`;
+    const Token_Endpoint = `https://login.microsoftonline.com/common/oauth2/v2.0/token`;
     const Grant_Type = 'authorization_code';
     const Code = req.body.code;
     const Redirect_Uri = 'http://localhost:8000/give/me/the/code';
