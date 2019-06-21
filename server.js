@@ -25,12 +25,11 @@ app.get('/', (req, res) => {
 //Set 1: Ask the authorization code
 app.get('/get/the/code', (req, res) => {
 
-    // const Authorization_Endpoint = `https://login.microsoftonline.com/${process.env.TENANT_ID}/oauth2/authorize`; 
-    const Authorization_Endpoint = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize`; 
+    const Authorization_Endpoint = `https://login.microsoftonline.com/${process.env.TENANT_ID}/oauth2/authorize`; 
+    // const Authorization_Endpoint = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize`; 
     const Response_Type = 'code';
     const Client_Id = process.env.CLIENT_ID;
     const Redirect_Uri = 'http://localhost:8000/give/me/the/code';
-    //const Scope = 'https://graph.microsoft.com/User.Read';
     const Scope = process.env.SCOPE;
     const State = 'ThisIsMyStateValue';
 
@@ -51,14 +50,13 @@ app.get('/give/me/the/code', (req, res) => {
 //Step 3: Exchange the code for a token
 app.post('/exchange/the/code/for/a/token', (req, res) => {
 
-    // const Token_Endpoint = `https://login.microsoftonline.com/${process.env.TENANT_ID}/oauth2/v2.0/token`;
-    const Token_Endpoint = `https://login.microsoftonline.com/common/oauth2/v2.0/token`;
+    const Token_Endpoint = `https://login.microsoftonline.com/${process.env.TENANT_ID}/oauth2/v2.0/token`;
+    // const Token_Endpoint = `https://login.microsoftonline.com/common/oauth2/v2.0/token`;
     const Grant_Type = 'authorization_code';
     const Code = req.body.code;
     const Redirect_Uri = 'http://localhost:8000/give/me/the/code';
     const Client_Id = process.env.CLIENT_ID;
     const Client_Secret = process.env.CLIENT_SECRET;
-    //const Scope = 'https://graph.microsoft.com/User.Read';
     const Scope = process.env.SCOPE;
 
     let body = `grant_type=${Grant_Type}&code=${Code}&redirect_uri=${encodeURIComponent(Redirect_Uri)}&client_id=${Client_Id}&client_secret=${Client_Secret}&scope=${encodeURIComponent(Scope)}`;
@@ -86,11 +84,11 @@ app.post('/call/ms/graph', (req, res) => {
 
     let access_token = JSON.parse(req.body.token).access_token;
 
-    // const Microsoft_Graph_Endpoint = 'https://graph.microsoft.com/beta';
-    // const Acction_That_I_Have_Access_Because_Of_My_Scope = '/me';
     const Microsoft_Graph_Endpoint = 'https://graph.microsoft.com/v1.0';
+    const Acction_That_I_Have_Access_Because_Of_My_Scope = '/me';
+
     // const Acction_That_I_Have_Access_Because_Of_My_Scope = '/me/contacts?$skip=10';
-    const Acction_That_I_Have_Access_Because_Of_My_Scope = '/me/contacts';
+    // const Acction_That_I_Have_Access_Because_Of_My_Scope = '/me/contacts';
     // const Acction_That_I_Have_Access_Because_Of_My_Scope = '/me/people';
 
     log.info(access_token);
